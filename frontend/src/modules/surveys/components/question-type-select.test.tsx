@@ -1,0 +1,36 @@
+import { cleanup, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { QuestionTypeSelect } from "./question-type-select";
+
+describe("QuestionTypeSelect", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
+  it("ofrece únicamente los tres tipos de pregunta cerrada", async () => {
+    const user = userEvent.setup();
+    render(<QuestionTypeSelect id="type" value="single_choice" onChange={vi.fn()} />);
+
+    await user.click(screen.getByRole("combobox", { name: "Tipo de pregunta" }));
+
+    expect((await screen.findAllByRole("option")).map((option) => option.textContent)).toEqual([
+      "Opción única",
+      "Opción múltiple",
+      "Lista desplegable",
+    ]);
+  });
+
+  it("muestra el tipo actual y notifica el nuevo tipo", async () => {
+    const user = userEvent.setup();
+    const onChange = vi.fn();
+    render(<QuestionTypeSelect id="type" value="multiple_choice" onChange={onChange} />);
+
+    expect(screen.getByRole("combobox", { name: "Tipo de pregunta" })).toHaveTextContent("Opción múltiple");
+
+    await user.click(screen.getByRole("combobox", { name: "Tipo de pregunta" }));
+    await user.click(await screen.findByRole("option", { name: "Lista desplegable" }));
+
+    expect(onChange).toHaveBeenCalledWith("dropdown");
+  });
+});
