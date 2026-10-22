@@ -46,6 +46,7 @@ export const WORKSPACE_SECTIONS: readonly WorkspaceSectionProps[] = [
     items: [
       { label: "Usuarios aceptados", href: "/backoffice/reports/registered-users" },
       { label: "Usuarios rechazados", href: "/backoffice/reports/rejected-users" },
+      { label: "Encuesta de empleabilidad", href: "/backoffice/reports/surveys" },
       { label: "Historial de reportes", href: "/backoffice/reports/history" },
     ],
   },
