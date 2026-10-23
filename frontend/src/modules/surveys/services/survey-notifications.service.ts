@@ -1,6 +1,7 @@
 import type { SurveyNotification } from "../types/survey-notification.types";
+import { SAMPLE_SURVEY_NOTIFICATIONS } from "../constants/sample-survey-notifications.constants";
 
-// TODO: conectar con el endpoint de encuestas del titulado cuando esté disponible en el backend.
+// Datos de demostración para esta rama visual.
 export const surveyNotificationsService = {
-  getNotifications: async (): Promise<SurveyNotification[]> => [],
+  getNotifications: async (): Promise<SurveyNotification[]> => SAMPLE_SURVEY_NOTIFICATIONS,
 };

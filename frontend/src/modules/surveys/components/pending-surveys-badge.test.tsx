@@ -23,7 +23,7 @@ describe("PendingSurveysBadge", () => {
   });
 
   it("no muestra nada cuando no hay encuestas pendientes", async () => {
-    const getNotifications = vi.spyOn(surveyNotificationsService, "getNotifications");
+    const getNotifications = vi.spyOn(surveyNotificationsService, "getNotifications").mockResolvedValue([]);
     const { container } = render(<PendingSurveysBadge />, createQueryWrapper());
 
     await vi.waitFor(() => expect(getNotifications).toHaveBeenCalled());
