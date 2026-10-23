@@ -25,7 +25,6 @@ enum SurveyStatus {
 enum SurveyQuestionType {
   SINGLE_CHOICE
   MULTIPLE_CHOICE
-  DROPDOWN
 }
 
 model Survey {

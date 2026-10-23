@@ -74,7 +74,7 @@ describe('SurveysRepository', () => {
         },
         {
           statement: 'Segunda',
-          type: 'DROPDOWN',
+          type: 'MULTIPLE_CHOICE',
           isRequired: false,
           options: [{ label: 'A' }, { label: 'B' }, { label: 'C' }],
         },
@@ -105,7 +105,7 @@ describe('SurveysRepository', () => {
       type: 'SINGLE_CHOICE',
       isRequired: true,
     });
-    expect(questions[1]).toMatchObject({ position: 2, type: 'DROPDOWN', isRequired: false });
+    expect(questions[1]).toMatchObject({ position: 2, type: 'MULTIPLE_CHOICE', isRequired: false });
     expect(questions[0].id).toMatch(UUID_PATTERN);
 
     const [{ data: options }] = prisma.tx.surveyQuestionOption.createMany.mock.calls[0];

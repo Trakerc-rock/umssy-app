@@ -214,8 +214,8 @@ describe('createSurveySchema', () => {
     });
   });
 
-  it('rechaza tipos de pregunta abiertos', () => {
-    const questions = [{ ...VALID_QUESTION, type: 'short_text' }];
+  it.each(['short_text', 'dropdown'])('rechaza el tipo de pregunta %s', (type) => {
+    const questions = [{ ...VALID_QUESTION, type }];
 
     expect(issues({ questions })).toContainEqual({
       path: 'questions.0.type',

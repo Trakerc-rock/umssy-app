@@ -18,7 +18,6 @@ describe('SurveyMapper', () => {
         questions: [
           { statement: 'A', type: 'single_choice', isRequired: true, options: [{ label: 'x' }] },
           { statement: 'B', type: 'multiple_choice', isRequired: false, options: [] },
-          { statement: 'C', type: 'dropdown', isRequired: true, options: [{ label: 'y' }] },
         ],
       },
       'admin-1',
@@ -36,7 +35,6 @@ describe('SurveyMapper', () => {
       questions: [
         { statement: 'A', type: 'SINGLE_CHOICE', isRequired: true, options: [{ label: 'x' }] },
         { statement: 'B', type: 'MULTIPLE_CHOICE', isRequired: false, options: [] },
-        { statement: 'C', type: 'DROPDOWN', isRequired: true, options: [{ label: 'y' }] },
       ],
     });
   });

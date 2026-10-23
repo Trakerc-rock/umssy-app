@@ -19,8 +19,7 @@ export type SurveyStatus = (typeof SurveyStatus)[keyof typeof SurveyStatus]
 
 export const SurveyQuestionType = {
   SINGLE_CHOICE: 'SINGLE_CHOICE',
-  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE',
-  DROPDOWN: 'DROPDOWN'
+  MULTIPLE_CHOICE: 'MULTIPLE_CHOICE'
 } as const
 
 export type SurveyQuestionType = (typeof SurveyQuestionType)[keyof typeof SurveyQuestionType]

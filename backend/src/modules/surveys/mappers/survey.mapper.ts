@@ -28,7 +28,6 @@ const STATUS_TO_RESPONSE: Record<SurveyStatus, SurveyStatusValue> = {
 const QUESTION_TYPE_TO_RECORD: Record<SurveyQuestionTypeValue, SurveyQuestionType> = {
   single_choice: SurveyQuestionType.SINGLE_CHOICE,
   multiple_choice: SurveyQuestionType.MULTIPLE_CHOICE,
-  dropdown: SurveyQuestionType.DROPDOWN,
 };
 
 @Injectable()
