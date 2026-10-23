@@ -8,7 +8,7 @@ import {
   SURVEY_STATUS_LABELS,
   SURVEY_STATUS_MESSAGES,
   SURVEY_STATUS_TONES,
-  SURVEYS_PATH,
+  SURVEY_NOTIFICATIONS_PATH,
 } from "../constants/survey-notifications.constants";
 import type { SurveyNotificationItemProps } from "../types/survey-notification-item-props.types";
 import { formatSurveyDate } from "../utils/format-survey-date";
@@ -21,7 +21,7 @@ export function SurveyNotificationItem({ notification }: SurveyNotificationItemP
   const renderAction = () => {
     if (isPending) {
       return (
-        <Link href={`${SURVEYS_PATH}/${id}`} className={cn(buttonVariants({ variant: "brand" }), "w-full")}>
+        <Link href={`${SURVEY_NOTIFICATIONS_PATH}/${id}`} className={cn(buttonVariants({ variant: "brand" }), "w-full")}>
           {ANSWER_SURVEY_LABEL}
           <ArrowRight data-icon="inline-end" aria-hidden="true" />
         </Link>

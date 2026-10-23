@@ -1,8 +1,21 @@
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createQueryWrapper } from "@/shared/testing/create-query-wrapper";
-import { surveysService } from "../services/surveys.service";
+import { surveyNotificationsService } from "../services/survey-notifications.service";
+import type { SurveyNotification } from "../types/survey-notification.types";
 import { SurveyNotificationsView } from "./survey-notifications-view";
+
+const SURVEYS: SurveyNotification[] = [
+  { id: "employability-2026", title: "Encuesta de empleabilidad 2026", publishedAt: "2026-10-15", status: "pending" },
+  { id: "satisfaction-2025", title: "Encuesta de satisfacción 2025", publishedAt: "2026-09-20", status: "expired" },
+  { id: "graduate-follow-up", title: "Encuesta de seguimiento a titulados", publishedAt: "2026-10-02", status: "pending" },
+  { id: "job-placement", title: "Encuesta de inserción laboral", publishedAt: "2026-09-20", status: "answered" },
+  { id: "data-update", title: "Encuesta de actualización de datos", publishedAt: "2026-07-25", status: "answered" },
+];
+
+function mockSurveys(surveys: SurveyNotification[]) {
+  vi.spyOn(surveyNotificationsService, "getNotifications").mockResolvedValue(surveys);
+}
 
 function renderView() {
   const { wrapper } = createQueryWrapper();
@@ -22,6 +35,7 @@ describe("SurveyNotificationsView", () => {
   });
 
   it("muestra el título, todas las encuestas y cuántas están pendientes", async () => {
+    mockSurveys(SURVEYS);
     renderView();
 
     expect(screen.getByRole("heading", { level: 1, name: "Notificaciones de encuestas" })).toBeInTheDocument();
@@ -31,7 +45,7 @@ describe("SurveyNotificationsView", () => {
   });
 
   it("actualiza el contador según la cantidad de encuestas pendientes", async () => {
-    vi.spyOn(surveysService, "getNotifications").mockResolvedValue(
+    mockSurveys(
       Array.from({ length: 5 }, (_, index) => ({
         id: `pending-${index}`,
         title: `Encuesta pendiente ${index + 1}`,
@@ -45,6 +59,7 @@ describe("SurveyNotificationsView", () => {
   });
 
   it("permite responder solo las encuestas pendientes", async () => {
+    mockSurveys(SURVEYS);
     renderView();
 
     const answerLinks = await screen.findAllByRole("link", { name: "Responder encuesta" });
@@ -56,6 +71,7 @@ describe("SurveyNotificationsView", () => {
   });
 
   it("marca la encuesta caducada como caducada y sin opción de responder", async () => {
+    mockSurveys(SURVEYS);
     renderView();
 
     const row = await findSurveyRow("Encuesta de satisfacción 2025");
@@ -67,6 +83,7 @@ describe("SurveyNotificationsView", () => {
   });
 
   it("marca las encuestas respondidas como registradas, con su fecha y sin acciones", async () => {
+    mockSurveys(SURVEYS);
     renderView();
 
     const row = await findSurveyRow("Encuesta de inserción laboral");
@@ -79,8 +96,7 @@ describe("SurveyNotificationsView", () => {
     expect(within(row).getByText("20 sep. 2026")).toBeInTheDocument();
   });
 
-  it("muestra un mensaje cuando no hay encuestas", async () => {
-    vi.spyOn(surveysService, "getNotifications").mockResolvedValue([]);
+  it("muestra el estado vacío cuando el servicio no devuelve encuestas", async () => {
     renderView();
 
     expect(await screen.findByRole("heading", { name: "No hay encuestas disponibles" })).toBeInTheDocument();
@@ -89,7 +105,7 @@ describe("SurveyNotificationsView", () => {
   });
 
   it("muestra un error cuando no se pueden cargar las encuestas", async () => {
-    vi.spyOn(surveysService, "getNotifications").mockRejectedValue(new Error("fallo"));
+    vi.spyOn(surveyNotificationsService, "getNotifications").mockRejectedValue(new Error("fallo"));
     renderView();
 
     expect(await screen.findByRole("alert")).toHaveTextContent("No se pudieron cargar tus encuestas.");

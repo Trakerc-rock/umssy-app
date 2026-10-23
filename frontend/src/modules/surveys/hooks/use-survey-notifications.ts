@@ -5,13 +5,13 @@ import {
   SURVEY_NOTIFICATIONS_LOAD_ERROR_MESSAGE,
   SURVEYS_QUERY_KEYS,
 } from "../constants/survey-notifications.constants";
-import { surveysService } from "../services/surveys.service";
+import { surveyNotificationsService } from "../services/survey-notifications.service";
 import { countPendingSurveys } from "../utils/count-pending-surveys";
 
 export function useSurveyNotifications() {
   const query = useQuery({
     queryKey: SURVEYS_QUERY_KEYS.notifications,
-    queryFn: surveysService.getNotifications,
+    queryFn: surveyNotificationsService.getNotifications,
   });
   const notifications = query.data ?? [];
 

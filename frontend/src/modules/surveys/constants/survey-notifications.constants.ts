@@ -1,6 +1,6 @@
 import type { SurveyNotificationStatus } from "../types/survey-notification.types";
 
-export const SURVEYS_PATH = "/surveys";
+export const SURVEY_NOTIFICATIONS_PATH = "/surveys";
 export const SURVEY_NOTIFICATIONS_LABEL = "Notificaciones de encuestas";
 export const SURVEY_NOTIFICATIONS_DESCRIPTION = "Consulta los avisos de nuevas encuestas disponibles para ti.";
 export const SURVEY_NOTIFICATIONS_LOAD_ERROR_MESSAGE = "No se pudieron cargar tus encuestas. Intenta nuevamente.";
