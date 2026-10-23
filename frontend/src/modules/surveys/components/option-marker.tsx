@@ -1,15 +1,7 @@
 import { cn } from "cn";
 import type { OptionMarkerProps } from "../types/survey-component-props.types";
 
-export function OptionMarker({ questionType, index, className }: OptionMarkerProps) {
-  if (questionType === "dropdown") {
-    return (
-      <span aria-hidden="true" data-marker="number" className={cn("w-5 shrink-0 text-right text-sm text-text-secondary", className)}>
-        {index + 1}.
-      </span>
-    );
-  }
-
+export function OptionMarker({ questionType, className }: OptionMarkerProps) {
   return (
     <span
       aria-hidden="true"

@@ -111,11 +111,11 @@ describe("surveyBuilderReducer", () => {
     const initial = withQuestions(1);
     const id = initial.questions[0].id;
     let state = reduce(initial, { type: "updateStatement", questionId: id, statement: "x".repeat(300) });
-    state = reduce(state, { type: "changeType", questionId: id, questionType: "dropdown" });
+    state = reduce(state, { type: "changeType", questionId: id, questionType: "multiple_choice" });
     state = reduce(state, { type: "toggleRequired", questionId: id });
 
     expect(state.questions[0].statement).toHaveLength(250);
-    expect(state.questions[0].type).toBe("dropdown");
+    expect(state.questions[0].type).toBe("multiple_choice");
     expect(state.questions[0].isRequired).toBe(false);
     expect(state.questions[0].options).toEqual(initial.questions[0].options);
     expect(reduce(initial, { type: "toggleRequired", questionId: "missing" })).toBe(initial);

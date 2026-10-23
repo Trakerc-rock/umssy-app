@@ -8,7 +8,7 @@ describe("QuestionTypeSelect", () => {
     cleanup();
   });
 
-  it("ofrece únicamente los tres tipos de pregunta cerrada", async () => {
+  it("ofrece únicamente opción única y opción múltiple", async () => {
     const user = userEvent.setup();
     render(<QuestionTypeSelect id="type" value="single_choice" onChange={vi.fn()} />);
 
@@ -17,20 +17,19 @@ describe("QuestionTypeSelect", () => {
     expect((await screen.findAllByRole("option")).map((option) => option.textContent)).toEqual([
       "Opción única",
       "Opción múltiple",
-      "Lista desplegable",
     ]);
   });
 
   it("muestra el tipo actual y notifica el nuevo tipo", async () => {
     const user = userEvent.setup();
     const onChange = vi.fn();
-    render(<QuestionTypeSelect id="type" value="multiple_choice" onChange={onChange} />);
+    render(<QuestionTypeSelect id="type" value="single_choice" onChange={onChange} />);
 
-    expect(screen.getByRole("combobox", { name: "Tipo de pregunta" })).toHaveTextContent("Opción múltiple");
+    expect(screen.getByRole("combobox", { name: "Tipo de pregunta" })).toHaveTextContent("Opción única");
 
     await user.click(screen.getByRole("combobox", { name: "Tipo de pregunta" }));
-    await user.click(await screen.findByRole("option", { name: "Lista desplegable" }));
+    await user.click(await screen.findByRole("option", { name: "Opción múltiple" }));
 
-    expect(onChange).toHaveBeenCalledWith("dropdown");
+    expect(onChange).toHaveBeenCalledWith("multiple_choice");
   });
 });

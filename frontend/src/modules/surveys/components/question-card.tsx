@@ -178,7 +178,7 @@ export function QuestionCard({
                 />
               ))}
               <div className="flex h-10 items-center gap-3">
-                <OptionMarker questionType={question.type} index={options.length} />
+                <OptionMarker questionType={question.type} />
                 <Button
                   variant="link"
                   onClick={() => onAddOption(question.id)}

@@ -11,7 +11,7 @@ describe("toCreateSurveyPayload", () => {
         {
           id: "q1",
           statement: "  ¿Trabajas? ",
-          type: "dropdown",
+          type: "multiple_choice",
           isRequired: false,
           options: [
             { id: "a", label: " Sí " },
@@ -30,7 +30,7 @@ describe("toCreateSurveyPayload", () => {
       opensAt: "2026-11-03T04:00:00.000Z",
       closesAt: "2026-12-16T03:59:59.999Z",
       status: "published",
-      questions: [{ statement: "¿Trabajas?", type: "dropdown", isRequired: false, options: [{ label: "Sí" }, { label: "No" }] }],
+      questions: [{ statement: "¿Trabajas?", type: "multiple_choice", isRequired: false, options: [{ label: "Sí" }, { label: "No" }] }],
     });
   });
 

@@ -3,7 +3,6 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SURVEY_TEXT } from "../constants/survey-builder.constants";
 import type { PreviewQuestionProps } from "../types/survey-component-props.types";
 import { RequiredMark } from "./required-mark";
@@ -47,23 +46,6 @@ export function PreviewQuestion({ question, index }: PreviewQuestionProps) {
               </Label>
             </div>
           ))}
-        </div>
-      )}
-
-      {question.type === "dropdown" && (
-        <div className="clear-both">
-          <Select items={options}>
-            <SelectTrigger aria-labelledby={`${baseId}-legend`} className="w-full sm:w-72">
-              <SelectValue placeholder={SURVEY_TEXT.choose} />
-            </SelectTrigger>
-            <SelectContent alignItemWithTrigger={false} className="bg-surface">
-              {options.map((option) => (
-                <SelectItem key={option.id} value={option.value} variant="subtle">
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
       )}
     </fieldset>

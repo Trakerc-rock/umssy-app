@@ -137,12 +137,12 @@ describe("QuestionCard", () => {
   });
 
   it("resume una pregunta opcional sin título", () => {
-    renderCard({ isActive: false, question: { ...QUESTION, statement: "", isRequired: false, type: "dropdown" } });
+    renderCard({ isActive: false, question: { ...QUESTION, statement: "", isRequired: false, type: "multiple_choice" } });
     const summary = screen.getByRole("button", { name: "Editar pregunta 1" });
 
     expect(summary).toHaveTextContent("1. Pregunta sin título");
     expect(summary).not.toHaveTextContent("*");
-    expect(summary).toHaveTextContent("Lista desplegable");
+    expect(summary).toHaveTextContent("Opción múltiple");
   });
 
   it("reordena con las flechas del teclado desde el manejador", async () => {

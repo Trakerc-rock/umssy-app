@@ -1,4 +1,4 @@
-import { CircleChevronDown, CircleDot, SquareCheck } from "lucide-react";
+import { CircleDot, SquareCheck } from "lucide-react";
 import type { QuestionTypeOption } from "../types/question-type-option.types";
 import type { QuestionType, SurveyStatus } from "../types/survey.types";
 
@@ -17,7 +17,6 @@ export const DEFAULT_OPTION_COUNT = 2;
 export const QUESTION_TYPE_OPTIONS: readonly QuestionTypeOption[] = [
   { value: "single_choice", label: "Opción única", icon: CircleDot },
   { value: "multiple_choice", label: "Opción múltiple", icon: SquareCheck },
-  { value: "dropdown", label: "Lista desplegable", icon: CircleChevronDown },
 ];
 
 export const QUESTION_TYPE_ITEMS = QUESTION_TYPE_OPTIONS.map(({ value, label }) => ({ value, label }));
@@ -25,7 +24,6 @@ export const QUESTION_TYPE_ITEMS = QUESTION_TYPE_OPTIONS.map(({ value, label }) 
 export const QUESTION_TYPE_LABELS: Readonly<Record<QuestionType, string>> = {
   single_choice: "Opción única",
   multiple_choice: "Opción múltiple",
-  dropdown: "Lista desplegable",
 };
 
 export const SURVEY_STATUS_LABELS: Readonly<Record<SurveyStatus, string>> = {
@@ -45,7 +43,6 @@ export const SURVEY_TEXT = {
   required: "Obligatoria",
   selectCareer: "Seleccione una carrera",
   loading: "Cargando...",
-  choose: "Elegir",
   selectPeriod: "Seleccione la gestión",
   selectDate: "dd/mm/aaaa",
   cancel: "Cancelar",

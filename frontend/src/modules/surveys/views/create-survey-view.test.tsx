@@ -197,14 +197,16 @@ describe("CreateSurveyView", { timeout: VIEW_TEST_TIMEOUT_MS }, () => {
 
     await user.click(screen.getByRole("combobox", { name: "Tipo de pregunta" }));
     const options = await screen.findAllByRole("option");
-    expect(options.map((option) => option.textContent)).toEqual(["Opción única", "Opción múltiple", "Lista desplegable"]);
-    await user.click(screen.getByRole("option", { name: "Lista desplegable" }));
+    expect(options.map((option) => option.textContent)).toEqual(["Opción única", "Opción múltiple"]);
+    await user.click(screen.getByRole("option", { name: "Opción múltiple" }));
 
     expect(screen.getByLabelText("Texto de la opción 1")).toHaveValue("Sí");
-    expect(document.querySelector('[data-marker="number"]')).toHaveTextContent("1.");
-
-    await selectOption(user, "Tipo de pregunta", "Opción múltiple");
     expect(document.querySelector('[data-marker="square"]')).not.toBeNull();
+    expect(document.querySelector('[data-marker="circle"]')).toBeNull();
+
+    await selectOption(user, "Tipo de pregunta", "Opción única");
+    expect(screen.getByLabelText("Texto de la opción 1")).toHaveValue("Sí");
+    expect(document.querySelector('[data-marker="circle"]')).not.toBeNull();
   });
 
   it("CA10: limita la longitud de los campos de texto", async () => {

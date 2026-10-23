@@ -2,7 +2,7 @@ import type { AcademicPeriod } from "@/modules/reports";
 
 export type SurveyStatus = "draft" | "published";
 
-export type QuestionType = "single_choice" | "multiple_choice" | "dropdown";
+export type QuestionType = "single_choice" | "multiple_choice";
 
 export interface Career {
   id: string;

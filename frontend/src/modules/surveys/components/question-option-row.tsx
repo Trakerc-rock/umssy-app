@@ -31,7 +31,7 @@ export function QuestionOptionRow({
 
   return (
     <div className="flex h-10 items-center gap-3">
-      <OptionMarker questionType={questionType} index={index} />
+      <OptionMarker questionType={questionType} />
       <Input
         ref={inputRef}
         value={option.label}

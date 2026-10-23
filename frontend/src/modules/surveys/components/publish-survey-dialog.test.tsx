@@ -8,7 +8,7 @@ import { PublishSurveyDialog } from "./publish-survey-dialog";
 const SURVEY = buildSurveyState({
   questions: [
     { id: "q1", statement: "A", type: "single_choice", isRequired: true, options: [] },
-    { id: "q2", statement: "B", type: "dropdown", isRequired: true, options: [] },
+    { id: "q2", statement: "B", type: "multiple_choice", isRequired: true, options: [] },
     { id: "q3", statement: "C", type: "multiple_choice", isRequired: true, options: [] },
     { id: "q4", statement: "D", type: "single_choice", isRequired: false, options: [] },
   ],

@@ -20,7 +20,7 @@ describe("SurveyPreviewDialog", () => {
       questions: [
         { id: "q1", statement: "Única", type: "single_choice", isRequired: true, options: OPTIONS },
         { id: "q2", statement: "Múltiple", type: "multiple_choice", isRequired: false, options: OPTIONS },
-        { id: "q3", statement: "", type: "dropdown", isRequired: true, options: OPTIONS },
+        { id: "q3", statement: "", type: "single_choice", isRequired: true, options: OPTIONS },
       ],
     });
     render(<SurveyPreviewDialog open survey={survey} careerTitle="Sistemas" onOpenChange={vi.fn()} />);
@@ -30,10 +30,10 @@ describe("SurveyPreviewDialog", () => {
     expect(dialog).toHaveTextContent("Situación laboral");
     expect(dialog).toHaveTextContent("Sistemas · II-2026 · 03/11/2026 - 15/12/2026");
     expect(dialog).toHaveTextContent(SURVEY_MESSAGES.previewNotice);
-    expect(within(dialog).getByRole("radiogroup")).toBeInTheDocument();
-    expect(within(dialog).getByRole("radio", { name: "Opción 2" })).toBeInTheDocument();
+    expect(within(dialog).getAllByRole("radio", { name: "Opción 2" })).toHaveLength(2);
+    expect(within(dialog).getAllByRole("radiogroup")).toHaveLength(2);
     expect(within(dialog).getAllByRole("checkbox")).toHaveLength(2);
-    expect(within(dialog).getByRole("combobox")).toHaveTextContent("Elegir");
+    expect(within(dialog).queryByRole("combobox")).not.toBeInTheDocument();
     expect(dialog).toHaveTextContent("3. Pregunta sin título");
   });
 

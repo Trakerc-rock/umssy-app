@@ -85,7 +85,6 @@ export interface QuestionOptionRowProps {
 
 export interface OptionMarkerProps {
   questionType: QuestionType;
-  index: number;
   className?: string;
 }
 
