@@ -1,10 +1,7 @@
--- CreateEnum
 CREATE TYPE "SurveyStatus" AS ENUM ('DRAFT', 'PUBLISHED');
 
--- CreateEnum
 CREATE TYPE "SurveyQuestionType" AS ENUM ('SINGLE_CHOICE', 'MULTIPLE_CHOICE');
 
--- CreateTable
 CREATE TABLE "surveys" (
     "id" UUID NOT NULL,
     "title" VARCHAR(150) NOT NULL,
@@ -21,7 +18,6 @@ CREATE TABLE "surveys" (
     CONSTRAINT "surveys_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "survey_questions" (
     "id" UUID NOT NULL,
     "survey_id" UUID NOT NULL,
@@ -35,7 +31,6 @@ CREATE TABLE "survey_questions" (
     CONSTRAINT "survey_questions_pkey" PRIMARY KEY ("id")
 );
 
--- CreateTable
 CREATE TABLE "survey_question_options" (
     "id" UUID NOT NULL,
     "question_id" UUID NOT NULL,
@@ -47,30 +42,20 @@ CREATE TABLE "survey_question_options" (
     CONSTRAINT "survey_question_options_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
 CREATE INDEX "surveys_career_id_academic_period_idx" ON "surveys"("career_id", "academic_period");
 
--- CreateIndex
 CREATE INDEX "surveys_created_by_id_idx" ON "surveys"("created_by_id");
 
--- CreateIndex
 CREATE INDEX "surveys_status_idx" ON "surveys"("status");
 
--- CreateIndex
 CREATE UNIQUE INDEX "survey_questions_survey_id_position_key" ON "survey_questions"("survey_id", "position");
 
--- CreateIndex
 CREATE UNIQUE INDEX "survey_question_options_question_id_position_key" ON "survey_question_options"("question_id", "position");
 
--- AddForeignKey
 ALTER TABLE "surveys" ADD CONSTRAINT "surveys_career_id_fkey" FOREIGN KEY ("career_id") REFERENCES "careers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
--- AddForeignKey
 ALTER TABLE "surveys" ADD CONSTRAINT "surveys_created_by_id_fkey" FOREIGN KEY ("created_by_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
--- AddForeignKey
 ALTER TABLE "survey_questions" ADD CONSTRAINT "survey_questions_survey_id_fkey" FOREIGN KEY ("survey_id") REFERENCES "surveys"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
--- AddForeignKey
 ALTER TABLE "survey_question_options" ADD CONSTRAINT "survey_question_options_question_id_fkey" FOREIGN KEY ("question_id") REFERENCES "survey_questions"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
